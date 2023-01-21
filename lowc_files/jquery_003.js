@@ -1,20 +1,3 @@
-/*******************************************************************************
- jquery.mb.components
- Copyright (c) 2001-2010. Matteo Bicocchi (Pupunzi); Open lab srl, Firenze - Italy
- email: mbicocchi@open-lab.com
- site: http://pupunzi.com
-
- Licences: MIT, GPL
- http://www.opensource.org/licenses/mit-license.php
- http://www.gnu.org/licenses/gpl.html
- ******************************************************************************/
-
-/*
- * jQuery.mb.components: jquery.mb.valueSlider
- * version: 1.0
- * © 2001 - 2009 Matteo Bicocchi (pupunzi), Open Lab
- *
- */
 var a=0;
 (function($){
 
@@ -83,7 +66,7 @@ var a=0;
         slider.zero= slider.options.minVal<0? (slider.sliderBar.outerWidth()*Math.abs(slider.options.minVal))/slider.rangeVal:0;
         slider.sliderZero.css({left:0, width:slider.zero});
         slider.sliderZeroLabel.css({left:slider.zero-5});
-        //FUCKING IE FIX!!
+        //IE死ね消えろIEなんて使うな
         if($.browser.msie && (parseFloat($.browser.version)==7)){
           $(slider).find("div").css({float:"left"});
           slider.sliderValueLabel.css({top:0, marginTop:-10,marginLeft:55, zIndex:10});

