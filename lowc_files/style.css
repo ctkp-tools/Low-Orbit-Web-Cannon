@@ -117,11 +117,11 @@ legend{
 }
 
 #counter_tail{
-	color:#08738B;
+	color:#ff0000;
 }
 
 #counter_requested{
-	color:#39BD15;
+	color:#ffd700;
 	font-family:Helvetica;
 	font-size:47px;
 	font-weight:bold;
